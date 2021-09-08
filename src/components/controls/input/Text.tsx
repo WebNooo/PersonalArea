@@ -1,39 +1,41 @@
-import React, {useCallback} from "react";
-import {IFormField} from "../../form/form";
+import React, {useCallback, useState} from 'react';
+import {IFormField} from '../../form/form';
+import classNames from 'classnames';
+import {useFormField} from '../../../utils';
 
 interface ITextControl {
-    onBlur?: (event?: React.FocusEvent<HTMLInputElement>) => void,
-    onChange?: (event?: React.ChangeEvent<HTMLInputElement>) => void,
-    field?: IFormField,
-    password?: boolean
+  onBlur?: (event?: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (event?: React.ChangeEvent<HTMLInputElement>) => void;
+  field?: IFormField;
+  password?: boolean;
+  clear?: boolean;
 }
 
-const Text = ({
-                  onBlur,
-                  onChange,
-                  field,
-                  password
-              }: ITextControl) => {
+const Text = ({onBlur, onChange, field, password, clear}: ITextControl) => {
+  const {handleFieldChange, handleFieldBlur} = useFormField(
+      field,
+      onBlur,
+      onChange,
+  );
+  const [hover, setHover] = useState(false);
 
-    const handleChange = useCallback((event?: React.ChangeEvent<HTMLInputElement>) => {
-        field?.handleChange?.(event)
-        onChange?.(event);
-    }, [field, onChange])
+  const toggleHover = useCallback(() => {
+    setHover(!hover);
+  }, [hover]);
 
-    const handleBlur = useCallback((event: React.FocusEvent<HTMLInputElement>) => {
-        field?.handleBlur?.()
-        onBlur?.(event)
-    }, [field, onBlur])
+  return (
+    <div className={classNames('form_field__control')}>
+      <input
+        onMouseEnter={toggleHover}
+        onMouseLeave={toggleHover}
+        type={password ? 'password' : 'input'}
+        className=""
+        value={field?.value ?? ''}
+        onChange={handleFieldChange}
+        onBlur={handleFieldBlur}
+      />
+    </div>
+  );
+};
 
-    return <input
-        type={password ? "password" : "input"}
-        className="form_field__control"
-        style={field?.change ? {border: "1px solid red"} : {}}
-        value={field?.value ?? ""}
-        onChange={handleChange}
-        onBlur={handleBlur}
-    />
-
-}
-
-export default Text
+export default Text;

@@ -1,10 +1,14 @@
-import React from "react";
+import React from 'react';
 
-interface IButton{
-    type: "primary"
-    text: string
+interface IButton {
+  type: 'primary';
+  text: string;
 }
 
-export const Button:React.FC<IButton> = ({text, type}) => {
-    return <button type={"submit"} className={`button ${type}`}>{text}</button>
-}
+export const Button: React.FC<IButton> = ({text, type}) => {
+  return (
+    <button type={'submit'} className={`button ${type}`}>
+      {text}
+    </button>
+  );
+};

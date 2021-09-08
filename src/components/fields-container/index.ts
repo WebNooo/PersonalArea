@@ -1,1 +1,1 @@
-export {FieldsContainer} from "./fields-container"
+export {FieldsContainer} from './fields-container';

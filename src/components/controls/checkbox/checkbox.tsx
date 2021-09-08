@@ -1,6 +1,6 @@
-import React from "react";
-import {IFormFields} from "../../../interfaces";
+import React from 'react';
+import {IFormFields} from '../../../interfaces';
 
-export const Checkbox:React.FC<IFormFields> = () => {
-    return <input type="checkbox"/>
-}
+export const Checkbox: React.FC<IFormFields> = () => {
+  return <input type="checkbox" />;
+};

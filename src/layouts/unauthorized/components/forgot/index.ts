@@ -1,1 +1,1 @@
-export {Forgot} from "./forgot"
+export {Forgot} from './forgot';
